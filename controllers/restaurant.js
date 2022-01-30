@@ -21,12 +21,16 @@ export const getRestaurant =  async (req, res) =>{
 
     const {id } = req.query
 
-    console.log(id)
+    /**Never use string concatination it will lead to sql injection */
+
+    const results = await db.query("SELECT * FROM restaurants WHERE id = $1",[id])
 
     try {
         res.status(200).json({
             success:true,
-            message:"restaurants"
+            data:{
+                restaurant:results.rows[0]
+            }
         })
         
     } catch (error) {
@@ -39,6 +43,8 @@ export const getRestaurant =  async (req, res) =>{
 export const updateRestaurant = async (req,res) =>{
 
     try {
+        const results = await db.query("SELECT ")
+
         res.status(200).json({
             success:true,
             message:"restaurants"
@@ -54,7 +60,7 @@ export const deleteRestaurant = async (req,res) =>{
     console.log(req.query)
 
     try {
-        res.status(200).json({
+       return  res.status(200).json({
             success:true,
             message:"restaurants"
         })
