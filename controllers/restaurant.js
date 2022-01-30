@@ -19,6 +19,10 @@ export const createRestaurant =  async (req, res) =>{
 /** get a restaurant */
 export const getRestaurant =  async (req, res) =>{
 
+    const {id } = req.query
+
+    console.log(id)
+
     try {
         res.status(200).json({
             success:true,
@@ -69,16 +73,24 @@ export const deleteRestaurant = async (req,res) =>{
 /** get all the restaurants */
 export const getAllRestaurants =  async (req, res) =>{
     console.log("HElllo")
-     const result = await db.query("SELECT *  FROM restaurants")
-    console.log(result)
+     const results = await db.query("SELECT *  FROM restaurants")
+    
 
     try {
         res.status(200).json({
             success:true,
-            message:"restaurantiopos"
+            results:results.rows.length,
+            data:{
+            restaurants:results.rows
+            }
         })
         
     } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            success:false,
+            message:error.message
+        })
         
     }
 }
