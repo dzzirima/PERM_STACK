@@ -9,7 +9,7 @@ const routes = new Router();
 // Add routes
  routes.get('/',getRestaurant);
 routes.post('/',createRestaurant);
-routes.put('/:id',updateRestaurant);
+routes.put('/',updateRestaurant);
 routes.delete('/',deleteRestaurant);
 routes.get('/all',getAllRestaurants)
 
